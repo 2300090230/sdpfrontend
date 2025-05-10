@@ -58,19 +58,19 @@ export default function SellersLobby() {
   const approveSeller = async (sid) => {
     try {
       // Animate the row before action
-      const row = document.querySelector(`tr[data-id="${sid}"]`);
+      const row = document.querySelector(tr[data-id="${sid}"]);
       if (row) {
         gsap.to(row, {
           backgroundColor: "rgba(209, 250, 229, 0.4)", // Light green highlight
           duration: 0.3,
           onComplete: async () => {
-            const response = await axios.post(`${config.url}/admin/approveseller`, sid);;
+            const response = await axios.put(${config.url}/seller/approve/${sid});
             alert(response.data);
             fetchSellers();
           }
         });
       } else {
-        const response = await axios.post(`${config.url}/admin/approveseller`, sid);
+        const response = await axios.put(${config.url}/seller/approve/${sid});
         alert(response.data);
         fetchSellers();
       }
@@ -82,19 +82,19 @@ export default function SellersLobby() {
   const rejectSeller = async (sid) => {
     try {
       // Animate the row before action
-      const row = document.querySelector(`tr[data-id="${sid}"]`);
+      const row = document.querySelector(tr[data-id="${sid}"]);
       if (row) {
         gsap.to(row, {
           backgroundColor: "rgba(254, 226, 226, 0.4)", // Light red highlight
           duration: 0.3,
           onComplete: async () => {
-            const response = await axios.put(`${config.url}/seller/reject/${sid}`);
+            const response = await axios.put(${config.url}/seller/reject/${sid});
             alert(response.data);
             fetchSellers();
           }
         });
       } else {
-        const response = await axios.put(`${config.url}/seller/reject/${sid}`);
+        const response = await axios.put(${config.url}/seller/reject/${sid});
         alert(response.data);
         fetchSellers();
       }
@@ -106,20 +106,20 @@ export default function SellersLobby() {
   const deleteSeller = async (id) => {
     try {
       // Animate the row before removing it
-      const row = document.querySelector(`tr[data-id="${id}"]`);
+      const row = document.querySelector(tr[data-id="${id}"]);
       if (row) {
         gsap.to(row, {
           opacity: 0,
           height: 0,
           duration: 0.3,
           onComplete: async () => {
-            const response = await axios.delete(`${config.url}/seller/delete?id=${id}`);
+            const response = await axios.delete(${config.url}/seller/delete?id=${id});
             alert(response.data);
             fetchSellers();
           }
         });
       } else {
-        const response = await axios.delete(`${config.url}/seller/delete?id=${id}`);
+        const response = await axios.delete(${config.url}/seller/delete?id=${id});
         alert(response.data);
         fetchSellers();
       }
