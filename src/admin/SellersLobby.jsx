@@ -13,7 +13,7 @@ export default function SellersLobby() {
   const fetchSellers = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(${config.url}/admin/viewallsellers);
+      const response = await axios.get(`${config.url}/admin/viewallsellers`);
       setSellers(response.data);
       setError("");
       
@@ -58,19 +58,19 @@ export default function SellersLobby() {
   const approveSeller = async (sid) => {
     try {
       // Animate the row before action
-      const row = document.querySelector(tr[data-id="${sid}"]);
+      const row = document.querySelector(`tr[data-id="${sid}"]`);
       if (row) {
         gsap.to(row, {
           backgroundColor: "rgba(209, 250, 229, 0.4)", // Light green highlight
           duration: 0.3,
           onComplete: async () => {
-            const response = await axios.put(${config.url}/seller/approve/${sid});
+            const response = await axios.put(`${config.url}/seller/approve/${sid}`);
             alert(response.data);
             fetchSellers();
           }
         });
       } else {
-        const response = await axios.put(${config.url}/seller/approve/${sid});
+        const response = await axios.put(`${config.url}/seller/approve/${sid}`);
         alert(response.data);
         fetchSellers();
       }
@@ -82,19 +82,19 @@ export default function SellersLobby() {
   const rejectSeller = async (sid) => {
     try {
       // Animate the row before action
-      const row = document.querySelector(tr[data-id="${sid}"]);
+      const row = document.querySelector(`tr[data-id="${sid}"]`);
       if (row) {
         gsap.to(row, {
           backgroundColor: "rgba(254, 226, 226, 0.4)", // Light red highlight
           duration: 0.3,
           onComplete: async () => {
-            const response = await axios.put(${config.url}/seller/reject/${sid});
+            const response = await axios.put(`${config.url}/seller/reject/${sid}`);
             alert(response.data);
             fetchSellers();
           }
         });
       } else {
-        const response = await axios.put(${config.url}/seller/reject/${sid});
+        const response = await axios.put(`${config.url}/seller/reject/${sid}`);
         alert(response.data);
         fetchSellers();
       }
@@ -106,20 +106,20 @@ export default function SellersLobby() {
   const deleteSeller = async (id) => {
     try {
       // Animate the row before removing it
-      const row = document.querySelector(tr[data-id="${id}"]);
+      const row = document.querySelector(`tr[data-id="${id}"]`);
       if (row) {
         gsap.to(row, {
           opacity: 0,
           height: 0,
           duration: 0.3,
           onComplete: async () => {
-            const response = await axios.delete(${config.url}/seller/delete?id=${id});
+            const response = await axios.delete(`${config.url}/seller/delete?id=${id}`);
             alert(response.data);
             fetchSellers();
           }
         });
       } else {
-        const response = await axios.delete(${config.url}/seller/delete?id=${id});
+        const response = await axios.delete(`${config.url}/seller/delete?id=${id}`);
         alert(response.data);
         fetchSellers();
       }
@@ -127,10 +127,11 @@ export default function SellersLobby() {
       setError("Deletion failed... " + err.message);
     }
   };
-// Generate skeleton loading rows
+
+  // Generate skeleton loading rows
   const renderSkeletonRows = () => {
     return Array(6).fill().map((_, index) => (
-      <tr key={skeleton-${index}} className="animate-pulse">
+      <tr key={`skeleton-${index}`} className="animate-pulse">
         <td className="px-4 py-3"><div className="h-4 bg-gray-200 rounded w-8"></div></td>
         <td className="px-4 py-3"><div className="h-4 bg-gray-200 rounded w-24"></div></td>
         <td className="px-4 py-3"><div className="h-4 bg-gray-200 rounded w-32"></div></td>
@@ -203,7 +204,7 @@ export default function SellersLobby() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                       </svg>
                       <p className="text-yellow-700 font-medium">No Sellers Found</p>
-<p className="text-gray-500 text-sm mt-1">There are currently no pending seller applications</p>
+                      <p className="text-gray-500 text-sm mt-1">There are currently no pending seller applications</p>
                     </div>
                   </td>
                 </tr>
@@ -213,7 +214,7 @@ export default function SellersLobby() {
                     key={seller.id} 
                     data-id={seller.id}
                     className="hover:bg-blue-50 transition-colors table-row"
-                    style={{transitionDelay: ${index * 30}ms}}
+                    style={{transitionDelay: `${index * 30}ms`}}
                   >
                     <td className="px-4 py-3 text-gray-800">{seller.id}</td>
                     <td className="px-4 py-3 text-gray-800 font-medium">{seller.name}</td>
@@ -265,7 +266,7 @@ export default function SellersLobby() {
                           onClick={() => deleteSeller(seller.id)}
                           className="relative overflow-hidden px-3 py-1.5 bg-red-600 text-white rounded transition-all duration-300 ease-in-out hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 flex items-center"
                         >
-<svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                           </svg>
                           Delete
