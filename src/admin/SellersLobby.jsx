@@ -64,13 +64,13 @@ export default function SellersLobby() {
           backgroundColor: "rgba(209, 250, 229, 0.4)", // Light green highlight
           duration: 0.3,
           onComplete: async () => {
-            const response = await axios.post(`${config.url}/approveseller`, sid);;
+            const response = await axios.post(`${config.url}/admin/approveseller`, sid);;
             alert(response.data);
             fetchSellers();
           }
         });
       } else {
-        const response = await axios.post(`${config.url}/approveseller`, sid);
+        const response = await axios.post(`${config.url}/admin/approveseller`, sid);
         alert(response.data);
         fetchSellers();
       }
