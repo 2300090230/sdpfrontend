@@ -177,11 +177,7 @@ export default function Layout() {
                     <FaUser className="mr-3 text-blue-500" /> Buyer Login
                   </Link>
                 </li>
-                <li>
-                  <Link to="/sellerlogin" className="flex items-center text-gray-700 hover:text-blue-600" onClick={toggleSidebar}>
-                    <FaStore className="mr-3 text-blue-500" /> Seller Login
-                  </Link>
-                </li>
+               
               </ul>
             </li>
             <li>
